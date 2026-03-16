@@ -28,8 +28,11 @@ Core endpoints covered:
 - **[Ad Squads](https://developers.snap.com/api/marketing-api/Ads-API/ad-squads)** -- list and inspect ad squads (Snapchat's term for ad groups)
 - **[Ads](https://developers.snap.com/api/marketing-api/Ads-API/ads)** -- list and inspect ads
 - **[Creatives](https://developers.snap.com/api/marketing-api/Ads-API/creatives)** -- list and inspect creatives
-- **[Audiences](https://developers.snap.com/api/marketing-api/Ads-API/audience-creation)** -- list custom audience segments and Snap Pixels
+- **[Audiences](https://developers.snap.com/api/marketing-api/Ads-API/audience-creation)** -- list custom audience segments, Snap Pixels, and custom conversions
+- **[Members & Roles](https://developers.snap.com/api/marketing-api/Ads-API/members)** -- organization members and roles
+- **[Billing](https://developers.snap.com/api/marketing-api/Ads-API/invoices)** -- invoices and transactions
 - **[Measurement](https://developers.snap.com/api/marketing-api/Ads-API/measurement)** -- campaign, ad squad, and ad level stats
+- **[Audit Logs](https://developers.snap.com/api/marketing-api/Ads-API/audit-logs)** -- organization audit trail
 
 ## Setup
 
@@ -254,6 +257,100 @@ List Snap Pixels for an ad account.
 
 ```bash
 snapchat-ads-cli pixels acc_abc123
+```
+
+Options:
+- `--limit <n>` -- results per page (default 50)
+- `--cursor <cursor>` -- pagination cursor
+
+### members
+
+List members of an organization.
+
+```bash
+snapchat-ads-cli members org_abc123
+```
+
+Options:
+- `--limit <n>` -- results per page (default 50)
+- `--cursor <cursor>` -- pagination cursor
+
+### roles
+
+List roles for an organization.
+
+```bash
+snapchat-ads-cli roles org_abc123
+```
+
+Options:
+- `--limit <n>` -- results per page (default 50)
+- `--cursor <cursor>` -- pagination cursor
+
+### invoices
+
+List invoices for an organization.
+
+```bash
+snapchat-ads-cli invoices org_abc123
+```
+
+Options:
+- `--limit <n>` -- results per page (default 50)
+- `--cursor <cursor>` -- pagination cursor
+
+### transactions
+
+List transactions for a billing center.
+
+```bash
+snapchat-ads-cli transactions bc_abc123
+```
+
+Options:
+- `--limit <n>` -- results per page (default 50)
+- `--cursor <cursor>` -- pagination cursor
+
+### audience-insights
+
+Get audience insights for an ad account.
+
+```bash
+snapchat-ads-cli audience-insights acc_abc123
+```
+
+Options:
+- `--limit <n>` -- results per page (default 50)
+- `--cursor <cursor>` -- pagination cursor
+
+### delivery-status
+
+Get delivery status for a campaign, ad squad, or ad. Useful for debugging why an entity is not serving.
+
+```bash
+snapchat-ads-cli delivery-status campaigns camp_abc123
+snapchat-ads-cli delivery-status adsquads squad_abc123
+snapchat-ads-cli delivery-status ads ad_abc123
+```
+
+### custom-conversions
+
+List custom conversions for an ad account.
+
+```bash
+snapchat-ads-cli custom-conversions acc_abc123
+```
+
+Options:
+- `--limit <n>` -- results per page (default 50)
+- `--cursor <cursor>` -- pagination cursor
+
+### audit-logs
+
+List audit logs for an organization.
+
+```bash
+snapchat-ads-cli audit-logs org_abc123
 ```
 
 Options:

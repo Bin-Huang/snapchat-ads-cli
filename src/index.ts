@@ -9,6 +9,9 @@ import { registerAdCommands } from "./commands/ads.js";
 import { registerCreativeCommands } from "./commands/creatives.js";
 import { registerAudienceCommands } from "./commands/audiences.js";
 import { registerStatsCommands } from "./commands/stats.js";
+import { registerMemberCommands } from "./commands/members.js";
+import { registerBillingCommands } from "./commands/billing.js";
+import { registerTargetingCommands } from "./commands/targeting.js";
 
 const program = new Command();
 
@@ -46,6 +49,9 @@ registerAdCommands(program);
 registerCreativeCommands(program);
 registerAudienceCommands(program);
 registerStatsCommands(program);
+registerMemberCommands(program);
+registerBillingCommands(program);
+registerTargetingCommands(program);
 
 if (process.argv.length <= 2) {
   program.outputHelp();
