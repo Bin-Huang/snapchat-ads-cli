@@ -32,6 +32,8 @@ Core endpoints covered:
 - **[Members & Roles](https://developers.snap.com/api/marketing-api/Ads-API/members)** -- organization members and roles
 - **[Billing](https://developers.snap.com/api/marketing-api/Ads-API/invoices)** -- invoices and transactions
 - **[Measurement](https://developers.snap.com/api/marketing-api/Ads-API/measurement)** -- campaign, ad squad, and ad level stats
+- **[Media & Lenses](https://developers.snap.com/api/marketing-api/Ads-API/media)** -- media files and AR lenses
+- **[Estimates](https://developers.snap.com/api/marketing-api/Ads-API/bid-estimate)** -- bid estimates, audience size, signal readiness
 - **[Audit Logs](https://developers.snap.com/api/marketing-api/Ads-API/audit-logs)** -- organization audit trail
 
 ## Setup
@@ -356,6 +358,65 @@ snapchat-ads-cli audit-logs org_abc123
 Options:
 - `--limit <n>` -- results per page (default 50)
 - `--cursor <cursor>` -- pagination cursor
+
+### media
+
+List media files for an ad account.
+
+```bash
+snapchat-ads-cli media acc_abc123
+```
+
+Options:
+- `--limit <n>` -- results per page (default 50)
+- `--cursor <cursor>` -- pagination cursor
+
+### lenses
+
+List AR lenses for an organization.
+
+```bash
+snapchat-ads-cli lenses org_abc123
+```
+
+Options:
+- `--limit <n>` -- results per page (default 50)
+- `--cursor <cursor>` -- pagination cursor
+
+### bid-estimate
+
+Get bid estimate for an ad account.
+
+```bash
+snapchat-ads-cli bid-estimate acc_abc123 --optimization-goal IMPRESSIONS
+```
+
+Options:
+- `--optimization-goal <goal>` -- IMPRESSIONS, SWIPES, APP_INSTALLS, VIDEO_VIEWS, etc.
+
+### audience-size
+
+Get estimated audience size for an ad account.
+
+```bash
+snapchat-ads-cli audience-size acc_abc123
+```
+
+### signal-readiness
+
+Get signal readiness status for an ad account (measures data quality for optimization).
+
+```bash
+snapchat-ads-cli signal-readiness acc_abc123
+```
+
+### ad-outcomes
+
+Get ad squad outcome configuration.
+
+```bash
+snapchat-ads-cli ad-outcomes squad_abc123
+```
 
 ### campaign-stats
 
