@@ -1,0 +1,34 @@
+{
+  "name": "snapchat-ads-cli",
+  "version": "0.1.0",
+  "description": "Snapchat Ads CLI for AI agents",
+  "type": "module",
+  "bin": {
+    "snapchat-ads-cli": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepack": "pnpm build"
+  },
+  "author": "Benn Huang <tohuangbin@gmail.com>",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Bin-Huang/snapchat-ads-cli.git"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "snapchat-ads",
+    "ads",
+    "cli",
+    "ai-agent",
+    "api"
+  ]
+}
