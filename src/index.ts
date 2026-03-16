@@ -29,8 +29,17 @@ program
   );
 
 program.configureOutput({
-  writeErr: () => {},
+  writeErr: (str: string) => {
+    // Convert commander errors to JSON stderr
+    const msg = str.replace(/^error: /i, "").trim();
+    if (msg) process.stderr.write(JSON.stringify({ error: msg }) + "\n");
+  },
+  writeOut: (str: string) => {
+    process.stdout.write(str);
+  },
 });
+
+program.showHelpAfterError(false);
 
 program.hook("preAction", () => {
   const format = program.opts().format;
@@ -56,6 +65,13 @@ registerBillingCommands(program);
 registerTargetingCommands(program);
 registerMediaCommands(program);
 registerEstimateCommands(program);
+
+program.on("command:*", (operands) => {
+  process.stderr.write(
+    JSON.stringify({ error: `Unknown command: ${operands[0]}. Run --help for available commands.` }) + "\n"
+  );
+  process.exit(1);
+});
 
 if (process.argv.length <= 2) {
   program.outputHelp();
