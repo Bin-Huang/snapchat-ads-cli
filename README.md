@@ -86,6 +86,25 @@ snapchat-ads-cli organizations
 snapchat-ads-cli accounts YOUR_ORG_ID
 ```
 
+## Entity hierarchy
+
+Snapchat Ads uses this hierarchy:
+
+```
+Organization
+ └── Ad Account
+      └── Campaign
+           └── Ad Squad (= ad group)
+                └── Ad
+                     └── Creative
+```
+
+Most list commands require the parent entity ID. Start with `organizations` to find your org, then `accounts <org-id>` to find ad accounts, and so on.
+
+## Monetary values
+
+Snapchat uses **micro-currency**: 1 dollar = 1,000,000 micro. All spend values in stats and budgets are in micro-currency. Divide by 1,000,000 to get the actual dollar amount.
+
 ## Usage
 
 All commands output pretty-printed JSON by default. Use `--format compact` for compact single-line JSON.
@@ -434,9 +453,9 @@ Options:
 - `--end-time <time>` -- end time, ISO 8601 (required)
 - `--granularity <gran>` -- TOTAL, DAY, HOUR (default TOTAL)
 - `--fields <fields>` -- stat fields to include (comma-separated)
-- `--swipe-up-attribution-window <window>` -- 1_DAY, 7_DAY, 28_DAY
-- `--view-attribution-window <window>` -- 1_HOUR, 3_HOUR, 6_HOUR, 1_DAY, 7_DAY, 28_DAY
-- `--conversion-source-types <types>` -- conversion source types (comma-separated)
+- `--swipe-up-attribution-window <window>` -- attribution window for swipe-ups: 1_DAY, 7_DAY, 28_DAY (how long after a swipe-up to count a conversion)
+- `--view-attribution-window <window>` -- attribution window for views: 1_HOUR, 3_HOUR, 6_HOUR, 1_DAY, 7_DAY, 28_DAY
+- `--conversion-source-types <types>` -- conversion source types (comma-separated): web, app, total
 
 ### adsquad-stats
 
