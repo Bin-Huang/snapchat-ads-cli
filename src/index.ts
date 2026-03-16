@@ -1,3 +1,55 @@
 #!/usr/bin/env node
-console.error(JSON.stringify({ error: "snapchat-ads-cli is under development. See https://github.com/Bin-Huang/snapchat-ads-cli" }));
-process.exit(1);
+import { Command } from "commander";
+import { registerOrganizationCommands } from "./commands/organizations.js";
+import { registerAccountCommands } from "./commands/accounts.js";
+import { registerFundingCommands } from "./commands/funding.js";
+import { registerCampaignCommands } from "./commands/campaigns.js";
+import { registerAdSquadCommands } from "./commands/adsquads.js";
+import { registerAdCommands } from "./commands/ads.js";
+import { registerCreativeCommands } from "./commands/creatives.js";
+import { registerAudienceCommands } from "./commands/audiences.js";
+import { registerStatsCommands } from "./commands/stats.js";
+
+const program = new Command();
+
+program
+  .name("snapchat-ads-cli")
+  .description("Snapchat Ads CLI for AI agents")
+  .version("1.0.0")
+  .option("--format <format>", "Output format", "json")
+  .option("--credentials <path>", "Path to credentials JSON file")
+  .addHelpText(
+    "after",
+    "\nDocs: https://github.com/Bin-Huang/snapchat-ads-cli"
+  );
+
+program.configureOutput({
+  writeErr: () => {},
+});
+
+program.hook("preAction", () => {
+  const format = program.opts().format;
+  if (format !== "json" && format !== "compact") {
+    process.stderr.write(
+      JSON.stringify({ error: "Format must be 'json' or 'compact'." }) + "\n"
+    );
+    process.exit(1);
+  }
+});
+
+registerOrganizationCommands(program);
+registerAccountCommands(program);
+registerFundingCommands(program);
+registerCampaignCommands(program);
+registerAdSquadCommands(program);
+registerAdCommands(program);
+registerCreativeCommands(program);
+registerAudienceCommands(program);
+registerStatsCommands(program);
+
+if (process.argv.length <= 2) {
+  program.outputHelp();
+  process.exit(0);
+}
+
+program.parse();
