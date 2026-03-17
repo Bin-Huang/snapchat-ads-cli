@@ -109,7 +109,7 @@ Snapchat uses **micro-currency**: 1 dollar = 1,000,000 micro. All spend values i
 
 All commands output pretty-printed JSON by default. Use `--format compact` for compact single-line JSON.
 
-Pagination uses cursor-based `--cursor` values from the `paging.next_link` in the response.
+Pagination uses `--limit` to control page size.
 
 ### organizations
 
@@ -138,7 +138,6 @@ snapchat-ads-cli accounts org_abc123 --limit 100
 
 Options:
 - `--limit <n>` -- results per page (default 50)
-- `--cursor <cursor>` -- pagination cursor
 
 ### account
 
@@ -158,7 +157,6 @@ snapchat-ads-cli funding-sources org_abc123
 
 Options:
 - `--limit <n>` -- results per page (default 50)
-- `--cursor <cursor>` -- pagination cursor
 
 ### billing-centers
 
@@ -170,7 +168,6 @@ snapchat-ads-cli billing-centers org_abc123
 
 Options:
 - `--limit <n>` -- results per page (default 50)
-- `--cursor <cursor>` -- pagination cursor
 
 ### campaigns
 
@@ -182,7 +179,6 @@ snapchat-ads-cli campaigns acc_abc123
 
 Options:
 - `--limit <n>` -- results per page (default 50)
-- `--cursor <cursor>` -- pagination cursor
 
 ### campaign
 
@@ -202,7 +198,6 @@ snapchat-ads-cli adsquads camp_abc123
 
 Options:
 - `--limit <n>` -- results per page (default 50)
-- `--cursor <cursor>` -- pagination cursor
 
 ### adsquad
 
@@ -222,7 +217,6 @@ snapchat-ads-cli ads squad_abc123
 
 Options:
 - `--limit <n>` -- results per page (default 50)
-- `--cursor <cursor>` -- pagination cursor
 
 ### ad
 
@@ -242,7 +236,6 @@ snapchat-ads-cli creatives acc_abc123
 
 Options:
 - `--limit <n>` -- results per page (default 50)
-- `--cursor <cursor>` -- pagination cursor
 
 ### creative
 
@@ -262,7 +255,6 @@ snapchat-ads-cli audiences acc_abc123
 
 Options:
 - `--limit <n>` -- results per page (default 50)
-- `--cursor <cursor>` -- pagination cursor
 
 ### audience
 
@@ -272,17 +264,13 @@ Get a specific audience segment.
 snapchat-ads-cli audience seg_abc123
 ```
 
-### pixels
+### pixel
 
-List Snap Pixels for an ad account.
+Get the Snap Pixel for an ad account.
 
 ```bash
-snapchat-ads-cli pixels acc_abc123
+snapchat-ads-cli pixel acc_abc123
 ```
-
-Options:
-- `--limit <n>` -- results per page (default 50)
-- `--cursor <cursor>` -- pagination cursor
 
 ### members
 
@@ -294,7 +282,6 @@ snapchat-ads-cli members org_abc123
 
 Options:
 - `--limit <n>` -- results per page (default 50)
-- `--cursor <cursor>` -- pagination cursor
 
 ### roles
 
@@ -306,43 +293,36 @@ snapchat-ads-cli roles org_abc123
 
 Options:
 - `--limit <n>` -- results per page (default 50)
-- `--cursor <cursor>` -- pagination cursor
 
 ### invoices
 
-List invoices for an organization.
+List invoices for an ad account.
 
 ```bash
-snapchat-ads-cli invoices org_abc123
+snapchat-ads-cli invoices acc_abc123
 ```
 
 Options:
 - `--limit <n>` -- results per page (default 50)
-- `--cursor <cursor>` -- pagination cursor
 
 ### transactions
 
-List transactions for a billing center.
+List transactions for an organization.
 
 ```bash
-snapchat-ads-cli transactions bc_abc123
+snapchat-ads-cli transactions org_abc123
 ```
 
 Options:
 - `--limit <n>` -- results per page (default 50)
-- `--cursor <cursor>` -- pagination cursor
 
 ### audience-insights
 
-Get audience insights for an ad account.
+Get targeting insights for an ad account.
 
 ```bash
 snapchat-ads-cli audience-insights acc_abc123
 ```
-
-Options:
-- `--limit <n>` -- results per page (default 50)
-- `--cursor <cursor>` -- pagination cursor
 
 ### delivery-status
 
@@ -356,27 +336,25 @@ snapchat-ads-cli delivery-status ads ad_abc123
 
 ### custom-conversions
 
-List custom conversions for an ad account.
+List custom conversions for a pixel.
 
 ```bash
-snapchat-ads-cli custom-conversions acc_abc123
+snapchat-ads-cli custom-conversions pix_abc123
 ```
 
 Options:
 - `--limit <n>` -- results per page (default 50)
-- `--cursor <cursor>` -- pagination cursor
 
 ### audit-logs
 
-List audit logs for an organization.
+List external changelogs for an entity (entity-type: organizations, adaccounts, campaigns, etc.).
 
 ```bash
-snapchat-ads-cli audit-logs org_abc123
+snapchat-ads-cli audit-logs organizations org_abc123
 ```
 
 Options:
 - `--limit <n>` -- results per page (default 50)
-- `--cursor <cursor>` -- pagination cursor
 
 ### media
 
@@ -388,7 +366,6 @@ snapchat-ads-cli media acc_abc123
 
 Options:
 - `--limit <n>` -- results per page (default 50)
-- `--cursor <cursor>` -- pagination cursor
 
 ### lenses
 
@@ -400,7 +377,6 @@ snapchat-ads-cli lenses org_abc123
 
 Options:
 - `--limit <n>` -- results per page (default 50)
-- `--cursor <cursor>` -- pagination cursor
 
 ### bid-estimate
 
@@ -423,10 +399,10 @@ snapchat-ads-cli audience-size acc_abc123
 
 ### signal-readiness
 
-Get signal readiness status for an ad account (measures data quality for optimization).
+Get event quality scores for a pixel.
 
 ```bash
-snapchat-ads-cli signal-readiness acc_abc123
+snapchat-ads-cli signal-readiness pix_abc123
 ```
 
 ### ad-outcomes
