@@ -1,5 +1,9 @@
 #!/usr/bin/env node
+import { createRequire } from "node:module";
 import { Command } from "commander";
+
+const require = createRequire(import.meta.url);
+const { version } = require("../package.json") as { version: string };
 import { registerOrganizationCommands } from "./commands/organizations.js";
 import { registerAccountCommands } from "./commands/accounts.js";
 import { registerFundingCommands } from "./commands/funding.js";
@@ -20,7 +24,7 @@ const program = new Command();
 program
   .name("snapchat-ads-cli")
   .description("Snapchat Ads CLI for AI agents")
-  .version("1.0.0")
+  .version(version)
   .option("--format <format>", "Output format", "json")
   .option("--credentials <path>", "Path to credentials JSON file")
   .addHelpText(
