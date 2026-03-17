@@ -5,18 +5,16 @@ import { output, fatal } from "../utils.js";
 
 export function registerBillingCommands(program: Command): void {
   program
-    .command("invoices <org-id>")
-    .description("List invoices for an organization")
+    .command("invoices <account-id>")
+    .description("List invoices for an ad account")
     .option("--limit <n>", "Results per page (default 50)", "50")
-    .option("--cursor <cursor>", "Pagination cursor")
-    .action(async (orgId: string, opts) => {
+    .action(async (accountId: string, opts) => {
       try {
         const creds = loadCredentials(program.opts().credentials);
         const params: Record<string, string> = { limit: opts.limit };
-        if (opts.cursor) params.cursor = opts.cursor;
         const data = await callApi({
           creds,
-          path: `organizations/${orgId}/invoices`,
+          path: `adaccounts/${accountId}/invoices`,
           params,
         });
         output(data, program.opts().format);
@@ -26,18 +24,16 @@ export function registerBillingCommands(program: Command): void {
     });
 
   program
-    .command("transactions <billing-center-id>")
-    .description("List transactions for a billing center")
+    .command("transactions <org-id>")
+    .description("List transactions for an organization")
     .option("--limit <n>", "Results per page (default 50)", "50")
-    .option("--cursor <cursor>", "Pagination cursor")
-    .action(async (billingCenterId: string, opts) => {
+    .action(async (orgId: string, opts) => {
       try {
         const creds = loadCredentials(program.opts().credentials);
         const params: Record<string, string> = { limit: opts.limit };
-        if (opts.cursor) params.cursor = opts.cursor;
         const data = await callApi({
           creds,
-          path: `billingcenters/${billingCenterId}/transactions`,
+          path: `organizations/${orgId}/transactions`,
           params,
         });
         output(data, program.opts().format);

@@ -6,18 +6,14 @@ import { output, fatal } from "../utils.js";
 export function registerTargetingCommands(program: Command): void {
   program
     .command("audience-insights <account-id>")
-    .description("Get audience insights for an ad account")
-    .option("--limit <n>", "Results per page (default 50)", "50")
-    .option("--cursor <cursor>", "Pagination cursor")
-    .action(async (accountId: string, opts) => {
+    .description("Get targeting insights for an ad account (POST)")
+    .action(async (accountId: string) => {
       try {
         const creds = loadCredentials(program.opts().credentials);
-        const params: Record<string, string> = { limit: opts.limit };
-        if (opts.cursor) params.cursor = opts.cursor;
         const data = await callApi({
           creds,
-          path: `adaccounts/${accountId}/audience_insights`,
-          params,
+          method: "POST",
+          path: `adaccounts/${accountId}/targeting_insights`,
         });
         output(data, program.opts().format);
       } catch (err) {
@@ -43,18 +39,16 @@ export function registerTargetingCommands(program: Command): void {
     });
 
   program
-    .command("custom-conversions <account-id>")
-    .description("List custom conversions for an ad account")
+    .command("custom-conversions <pixel-id>")
+    .description("List custom conversions for a pixel")
     .option("--limit <n>", "Results per page (default 50)", "50")
-    .option("--cursor <cursor>", "Pagination cursor")
-    .action(async (accountId: string, opts) => {
+    .action(async (pixelId: string, opts) => {
       try {
         const creds = loadCredentials(program.opts().credentials);
         const params: Record<string, string> = { limit: opts.limit };
-        if (opts.cursor) params.cursor = opts.cursor;
         const data = await callApi({
           creds,
-          path: `adaccounts/${accountId}/custom_conversions`,
+          path: `pixels/${pixelId}/custom_conversions`,
           params,
         });
         output(data, program.opts().format);
@@ -64,18 +58,16 @@ export function registerTargetingCommands(program: Command): void {
     });
 
   program
-    .command("audit-logs <org-id>")
-    .description("List audit logs for an organization")
+    .command("audit-logs <entity-type> <entity-id>")
+    .description("List external changelogs for an entity (entity-type: organizations, adaccounts, campaigns, etc.)")
     .option("--limit <n>", "Results per page (default 50)", "50")
-    .option("--cursor <cursor>", "Pagination cursor")
-    .action(async (orgId: string, opts) => {
+    .action(async (entityType: string, entityId: string, opts) => {
       try {
         const creds = loadCredentials(program.opts().credentials);
         const params: Record<string, string> = { limit: opts.limit };
-        if (opts.cursor) params.cursor = opts.cursor;
         const data = await callApi({
           creds,
-          path: `organizations/${orgId}/audit_logs`,
+          path: `${entityType}/${entityId}/external_changelogs`,
           params,
         });
         output(data, program.opts().format);

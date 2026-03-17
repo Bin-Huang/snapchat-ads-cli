@@ -6,9 +6,12 @@ interface CallOptions {
   creds: Credentials;
   path: string;
   params?: Record<string, string>;
+  method?: "GET" | "POST";
+  body?: unknown;
 }
 
 export async function callApi(opts: CallOptions): Promise<unknown> {
+  const method = opts.method ?? "GET";
   const url = new URL(`${BASE_URL}/${opts.path}`);
   if (opts.params) {
     for (const [k, v] of Object.entries(opts.params)) {
@@ -16,10 +19,19 @@ export async function callApi(opts: CallOptions): Promise<unknown> {
     }
   }
 
+  const headers: Record<string, string> = {
+    Authorization: `Bearer ${opts.creds.access_token}`,
+  };
+  let reqBody: string | undefined;
+  if (opts.body !== undefined) {
+    headers["Content-Type"] = "application/json";
+    reqBody = JSON.stringify(opts.body);
+  }
+
   const res = await fetch(url.toString(), {
-    headers: {
-      Authorization: `Bearer ${opts.creds.access_token}`,
-    },
+    method,
+    headers,
+    body: reqBody,
   });
 
   const text = await res.text();

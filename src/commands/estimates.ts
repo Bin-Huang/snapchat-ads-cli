@@ -41,14 +41,14 @@ export function registerEstimateCommands(program: Command): void {
     });
 
   program
-    .command("signal-readiness <account-id>")
-    .description("Get signal readiness status for an ad account")
-    .action(async (accountId: string) => {
+    .command("signal-readiness <pixel-id>")
+    .description("Get event quality scores for a pixel")
+    .action(async (pixelId: string) => {
       try {
         const creds = loadCredentials(program.opts().credentials);
         const data = await callApi({
           creds,
-          path: `adaccounts/${accountId}/signal_readiness`,
+          path: `pixels/${pixelId}/event_quality_scores`,
         });
         output(data, program.opts().format);
       } catch (err) {

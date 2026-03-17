@@ -8,12 +8,12 @@ export function registerCreativeCommands(program: Command): void {
     .command("creatives <account-id>")
     .description("List creatives for an ad account")
     .option("--limit <n>", "Results per page (default 50)", "50")
-    .option("--cursor <cursor>", "Pagination cursor")
+
     .action(async (accountId: string, opts) => {
       try {
         const creds = loadCredentials(program.opts().credentials);
         const params: Record<string, string> = { limit: opts.limit };
-        if (opts.cursor) params.cursor = opts.cursor;
+
         const data = await callApi({
           creds,
           path: `adaccounts/${accountId}/creatives`,

@@ -8,12 +8,12 @@ export function registerAdCommands(program: Command): void {
     .command("ads <adsquad-id>")
     .description("List ads for an ad squad")
     .option("--limit <n>", "Results per page (default 50)", "50")
-    .option("--cursor <cursor>", "Pagination cursor")
+
     .action(async (adsquadId: string, opts) => {
       try {
         const creds = loadCredentials(program.opts().credentials);
         const params: Record<string, string> = { limit: opts.limit };
-        if (opts.cursor) params.cursor = opts.cursor;
+
         const data = await callApi({
           creds,
           path: `adsquads/${adsquadId}/ads`,

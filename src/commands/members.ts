@@ -8,12 +8,12 @@ export function registerMemberCommands(program: Command): void {
     .command("members <org-id>")
     .description("List members of an organization")
     .option("--limit <n>", "Results per page (default 50)", "50")
-    .option("--cursor <cursor>", "Pagination cursor")
+
     .action(async (orgId: string, opts) => {
       try {
         const creds = loadCredentials(program.opts().credentials);
         const params: Record<string, string> = { limit: opts.limit };
-        if (opts.cursor) params.cursor = opts.cursor;
+
         const data = await callApi({
           creds,
           path: `organizations/${orgId}/members`,
@@ -29,12 +29,12 @@ export function registerMemberCommands(program: Command): void {
     .command("roles <org-id>")
     .description("List roles for an organization")
     .option("--limit <n>", "Results per page (default 50)", "50")
-    .option("--cursor <cursor>", "Pagination cursor")
+
     .action(async (orgId: string, opts) => {
       try {
         const creds = loadCredentials(program.opts().credentials);
         const params: Record<string, string> = { limit: opts.limit };
-        if (opts.cursor) params.cursor = opts.cursor;
+
         const data = await callApi({
           creds,
           path: `organizations/${orgId}/roles`,
