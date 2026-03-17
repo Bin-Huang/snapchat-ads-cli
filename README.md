@@ -1,6 +1,6 @@
 # snapchat-ads-cli
 
-Give AI agents direct access to Snapchat Ads data. One command to query organizations, campaigns, ad squads, and pull performance stats -- no SDK, no docs to read, no tokens wasted on boilerplate.
+Snapchat Ads CLI for AI agents (and humans). Debug ad delivery issues, estimate audience size and bids, pull stats with attribution windows, manage AR lenses and custom conversions, and more.
 
 **Works with:** OpenClaw, Claude Code, Cursor, Codex, and any agent that can run shell commands.
 
