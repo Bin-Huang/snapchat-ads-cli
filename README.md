@@ -10,11 +10,7 @@ Snapchat Ads CLI for AI agents (and humans). Debug ad delivery issues, estimate 
 npm install -g snapchat-ads-cli
 ```
 
-Or run directly with npx:
-
-```bash
-npx snapchat-ads-cli --help
-```
+Or run directly: `npx snapchat-ads-cli --help`
 
 ## How it works
 
