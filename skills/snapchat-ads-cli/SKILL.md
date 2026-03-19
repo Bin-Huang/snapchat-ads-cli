@@ -296,7 +296,7 @@ snapchat-ads-cli audit-logs ads AD_ID
 snapchat-ads-cli audit-logs campaigns CAMPAIGN_ID --limit 100
 ```
 
-The `entity-type` argument can be: `campaigns`, `adsquads`, `ads`, `creatives`. Supports `--limit <n>` (default 50).
+The `entity-type` argument is passed directly to the API path. Common values: `organizations`, `adaccounts`, `campaigns`, `adsquads`, `ads`, `creatives`. Supports `--limit <n>` (default 50).
 
 ### Media & lenses
 
