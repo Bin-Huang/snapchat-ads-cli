@@ -6,8 +6,17 @@ Snapchat Ads CLI for AI agents (and humans). Debug ad delivery issues, estimate 
 
 ## Installation
 
+Tell your AI agent (e.g. OpenClaw):
+
+> Install the CLI and skills from https://github.com/Bin-Huang/snapchat-ads-cli
+
+Or install manually:
+
 ```bash
 npm install -g snapchat-ads-cli
+
+# Add skills for AI agents (Claude Code, Cursor, Codex, etc.)
+npx skills add Bin-Huang/snapchat-ads-cli
 ```
 
 Or run directly: `npx snapchat-ads-cli --help`
