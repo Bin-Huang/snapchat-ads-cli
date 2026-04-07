@@ -1,7 +1,7 @@
 {
   "name": "snapchat-ads-cli",
   "version": "1.0.4",
-  "description": "Snapchat Ads CLI for AI agents",
+  "description": "Snapchat Ads CLI & Skills for AI agents",
   "type": "module",
   "bin": {
     "snapchat-ads-cli": "dist/index.js"
